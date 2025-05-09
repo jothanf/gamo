@@ -1,9 +1,9 @@
 <?php
 // Configuración de la conexión a la base de datos
 $host = "localhost"; // Por defecto, cambia si tu host es diferente
-$usuario = "u439962818_gamouser"; // Usuario de la base de datos
-$contraseña = "gamoAgent2025$"; // Contraseña de la base de datos
-$nombreBD = "u439962818_gamo"; // Nombre de la base de datos
+$usuario = ""; // Usuario de la base de datos
+$contraseña = ""; // Contraseña de la base de datos
+$nombreBD = ""; // Nombre de la base de datos
 
 // Crear conexión
 $conexion = new mysqli($host, $usuario, $contraseña, $nombreBD);
