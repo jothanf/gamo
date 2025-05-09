@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMO - Crea tu Avatar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="../../styles/navbar.css">
+  <link rel="stylesheet" href="../../styles/formularios.css">
+  <script src="../../scripts/navbar.js" defer></script>
+  <script src="../../scripts/avatar.js" defer></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+  <main>
+    <section class="form-section">
+      <div class="container">
+        <h1>Crea tu Avatar</h1>
+        <p class="form-intro">Personaliza tu avatar para comenzar a participar en misiones y ganar puntos en la comunidad.</p>
+        <div class="form-group">
+            <label>Elige tu avatar</label>
+            <div class="avatar-cards" style="display: flex; gap: 20px; justify-content: center;">
+              <img src="../../imgs/card_cuidador.png" alt="Cuidador" class="avatar-card-img" data-clase="cuidador" data-img="../../imgs/card_cuidador.png" style="width: 180px; cursor: pointer; border: 3px solid transparent; border-radius: 10px;">
+              <img src="../../imgs/card_explorador.png" alt="Explorador" class="avatar-card-img" data-clase="explorador" data-img="../../imgs/card_explorador.png" style="width: 180px; cursor: pointer; border: 3px solid transparent; border-radius: 10px;">
+              <img src="../../imgs/card_sabio.png" alt="Sabio" class="avatar-card-img" data-clase="sabio" data-img="../../imgs/card_sabio.png" style="width: 180px; cursor: pointer; border: 3px solid transparent; border-radius: 10px;">
+            </div>
+          </div>
+          
+        <form class="registro-form" action="/php/registro/registrar_avatar.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="inquilino_id">Selecciona tu Perfil</label>
+            <select id="inquilino_id" name="inquilino_id" required>
+              <option value="">Seleccionar perfil</option>
+              <!-- Los inquilinos se cargarán mediante JavaScript -->
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="nombre">Nombre de tu Avatar</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Elige un nombre para tu avatar" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="descripcion">Biografía</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Cuéntanos un poco sobre tu avatar..." rows="3"></textarea>
+          </div>
+          
+          <h3 class="form-section-title">Habilidades Iniciales</h3>
+          <p class="form-section-desc">Distribuye 40 puntos entre las siguientes áreas de habilidad:</p>
+          
+          <div class="habilidades-container">
+            <div class="form-group habilidad-group">
+              <label for="autocuidado">Autocuidado</label>
+              <div class="habilidad-input">
+                <input type="range" id="autocuidado" name="habilidades[autocuidado][puntos]" min="0" max="20" value="10" class="puntos-slider" />
+                <span class="puntos-value" id="autocuidado-value">10</span>
+              </div>
+              <input type="hidden" name="habilidades[autocuidado][nombre]" value="Autocuidado">
+              <input type="hidden" name="habilidades[autocuidado][area]" value="autocuidado">
+              <small>Capacidad para cuidar de tu propio bienestar</small>
+            </div>
+            
+            <div class="form-group habilidad-group">
+              <label for="cuidado_hogar">Cuidado del Hogar</label>
+              <div class="habilidad-input">
+                <input type="range" id="cuidado_hogar" name="habilidades[cuidado_hogar][puntos]" min="0" max="20" value="10" class="puntos-slider" />
+                <span class="puntos-value" id="cuidado_hogar-value">10</span>
+              </div>
+              <input type="hidden" name="habilidades[cuidado_hogar][nombre]" value="Cuidado del Hogar">
+              <input type="hidden" name="habilidades[cuidado_hogar][area]" value="cuidado_de_tu_hogar">
+              <small>Habilidad para mantener y mejorar tu espacio de vida</small>
+            </div>
+            
+            <div class="form-group habilidad-group">
+              <label for="cuidado_otro">Cuidado del Otro</label>
+              <div class="habilidad-input">
+                <input type="range" id="cuidado_otro" name="habilidades[cuidado_otro][puntos]" min="0" max="20" value="10" class="puntos-slider" />
+                <span class="puntos-value" id="cuidado_otro-value">10</span>
+              </div>
+              <input type="hidden" name="habilidades[cuidado_otro][nombre]" value="Cuidado del Otro">
+              <input type="hidden" name="habilidades[cuidado_otro][area]" value="cuidado_del_otro">
+              <small>Empatía y ayuda hacia los demás miembros de la comunidad</small>
+            </div>
+            
+            <div class="form-group habilidad-group">
+              <label for="responsabilidad">Responsabilidad</label>
+              <div class="habilidad-input">
+                <input type="range" id="responsabilidad" name="habilidades[responsabilidad][puntos]" min="0" max="20" value="10" class="puntos-slider" />
+                <span class="puntos-value" id="responsabilidad-value">10</span>
+              </div>
+              <input type="hidden" name="habilidades[responsabilidad][nombre]" value="Responsabilidad">
+              <input type="hidden" name="habilidades[responsabilidad][area]" value="responsabilidad">
+              <small>Fiabilidad en el cumplimiento de compromisos y obligaciones</small>
+            </div>
+            
+            <div class="puntos-disponibles">
+              <p>Puntos disponibles: <span id="puntos-restantes">0</span></p>
+            </div>
+          </div>
+          
+          <input type="hidden" name="clase" id="clase" required>
+          <input type="hidden" name="foto" id="foto" required>
+          <div id="avatar-error" style="color: red; display: none;">Debes seleccionar un avatar.</div>
+         
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Crear Avatar</button>
+            <a href="/dashboard" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div id="navbar-container"></div>
+  <script>
+    // Cargar el navbar
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/templates/components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          
+          // Reinicializar el JS del navbar
+          const script = document.createElement('script');
+          script.src = '../../scripts/navbar.js';
+          document.body.appendChild(script);
+        })
+        .catch(error => console.error('Error cargando el navbar:', error));
+      
+      // Cargar inquilinos
+      console.log('Solicitando inquilinos...');
+      fetch('/php/consultas/obtener_inquilinos.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la respuesta: ' + response.status);
+          }
+          console.log('Respuesta recibida para inquilinos');
+          return response.json();
+        })
+        .then(inquilinos => {
+          console.log('Inquilinos recibidos:', inquilinos);
+          const select = document.getElementById('inquilino_id');
+          
+          // Si no hay inquilinos, mostrar mensaje
+          if (!inquilinos || inquilinos.length === 0) {
+            console.log('No hay inquilinos disponibles');
+            const option = document.createElement('option');
+            option.value = "";
+            option.textContent = "No hay inquilinos registrados";
+            select.appendChild(option);
+          } else {
+            // Agregar cada inquilino al selector
+            inquilinos.forEach(inquilino => {
+              console.log('Añadiendo inquilino:', inquilino);
+              const option = document.createElement('option');
+              option.value = inquilino.id;
+              option.textContent = inquilino.nombre + (inquilino.unidad ? ' - Unidad ' + inquilino.unidad : '');
+              select.appendChild(option);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error cargando inquilinos:', error);
+          const select = document.getElementById('inquilino_id');
+          const option = document.createElement('option');
+          option.value = "";
+          option.textContent = "Error al cargar inquilinos";
+          select.appendChild(option);
+          
+          // Mostrar un mensaje visible en la página
+          const errorDiv = document.createElement('div');
+          errorDiv.style.color = 'red';
+          errorDiv.style.marginTop = '5px';
+          errorDiv.textContent = 'Error al cargar inquilinos. Revisa la consola para más detalles.';
+          select.parentNode.appendChild(errorDiv);
+        });
+      
+      // Control de puntos de habilidades
+      const sliders = document.querySelectorAll('.puntos-slider');
+      const puntosRestantes = document.getElementById('puntos-restantes');
+      const puntosMaximos = 40;
+      
+      // Actualizar contador de puntos inicialmente
+      actualizarPuntosRestantes();
+      
+      // Actualizar los valores mostrados y puntos restantes al mover los sliders
+      sliders.forEach(slider => {
+        const valueDisplay = document.getElementById(slider.id + '-value');
+        
+        slider.addEventListener('input', function() {
+          valueDisplay.textContent = this.value;
+          actualizarPuntosRestantes();
+        });
+      });
+      
+      function actualizarPuntosRestantes() {
+        let puntosUsados = 0;
+        sliders.forEach(slider => {
+          puntosUsados += parseInt(slider.value);
+        });
+        
+        const restantes = puntosMaximos - puntosUsados;
+        puntosRestantes.textContent = restantes;
+        
+        // Cambiar color según disponibilidad
+        if (restantes < 0) {
+          puntosRestantes.style.color = 'red';
+          document.querySelector('button[type="submit"]').disabled = true;
+        } else {
+          puntosRestantes.style.color = restantes === 0 ? 'green' : '';
+          document.querySelector('button[type="submit"]').disabled = false;
+        }
+      }
+      
+      // NUEVO: Preseleccionar inquilino si viene por GET
+      const urlParams = new URLSearchParams(window.location.search);
+      const inquilinoId = urlParams.get('inquilino_id');
+      if (inquilinoId) {
+        // Elimina el select y agrega un input hidden
+        const select = document.getElementById('inquilino_id');
+        const selectGroup = select.parentNode;
+        selectGroup.parentNode.removeChild(selectGroup); // Elimina todo el grupo del select
+
+        // Agrega el input hidden justo después del título del formulario
+        const form = document.querySelector('form.registro-form');
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'inquilino_id';
+        hiddenInput.value = inquilinoId;
+        form.insertBefore(hiddenInput, form.firstChild);
+      }
+
+      // Selección de avatar por card
+      const avatarImgs = document.querySelectorAll('.avatar-card-img');
+      const claseInput = document.getElementById('clase');
+      const fotoInput = document.getElementById('foto');
+      const avatarError = document.getElementById('avatar-error');
+
+      avatarImgs.forEach(img => {
+        img.addEventListener('click', function() {
+          // Quitar selección previa
+          avatarImgs.forEach(i => i.style.border = '3px solid transparent');
+          // Marcar seleccionada
+          this.style.border = '3px solid #4A6BFF';
+          // Guardar valores en los inputs hidden
+          claseInput.value = this.getAttribute('data-clase');
+          fotoInput.value = this.getAttribute('data-img');
+          avatarError.style.display = 'none';
+        });
+      });
+
+      // Validar selección antes de enviar el formulario
+      document.querySelector('form.registro-form').addEventListener('submit', function(e) {
+        if (!claseInput.value || !fotoInput.value) {
+          avatarError.style.display = 'block';
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

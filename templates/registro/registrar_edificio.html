@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMO - Registro de Edificio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="../../styles/navbar.css">
+  <link rel="stylesheet" href="../../styles/formularios.css">
+  <script src="../../scripts/navbar.js" defer></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+  <main>
+    <section class="form-section">
+      <div class="container">
+        <h1>Registro de Edificio</h1>
+        <p class="form-intro">Registra un nuevo edificio para comenzar a gestionarlo en la plataforma.</p>
+        
+        <form class="registro-form" action="/php/registro/registrar_edificio.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="nombre">Nombre del Edificio</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del edificio" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="constructor_id">Constructor</label>
+            <select id="constructor_id" name="constructor_id" required>
+              <option value="">Seleccionar constructor</option>
+              <!-- Los constructores se cargarán mediante JavaScript -->
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Dirección completa" required />
+          </div>
+          
+          <div class="form-group form-row">
+            <div class="form-col">
+              <label for="ciudad">Ciudad</label>
+              <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required />
+            </div>
+            
+            <div class="form-col">
+              <label for="pais">País</label>
+              <input type="text" id="pais" name="pais" placeholder="País" required />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="fecha_construccion">Fecha de Construcción</label>
+            <input type="date" id="fecha_construccion" name="fecha_construccion" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="numero_matricula">Número de Matrícula Inmobiliaria</label>
+            <input type="text" id="numero_matricula" name="numero_matricula" placeholder="Número de matrícula" />
+          </div>
+          
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Breve descripción del edificio" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="estatuto">Estatuto (opcional)</label>
+            <input type="file" id="estatuto" name="estatuto" accept=".pdf,.doc,.docx" />
+          </div>
+          
+          <div class="form-group">
+            <label for="manual_convivencia">Manual de Convivencia (opcional)</label>
+            <input type="file" id="manual_convivencia" name="manual_convivencia" accept=".pdf,.doc,.docx" />
+          </div>
+          
+          <div class="form-group">
+            <label for="reglamento_interno">Reglamento Interno (opcional)</label>
+            <input type="file" id="reglamento_interno" name="reglamento_interno" accept=".pdf,.doc,.docx" />
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar Edificio</button>
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cargar el navbar
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/templates/components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          
+          // Reinicializar el JS del navbar
+          const script = document.createElement('script');
+          script.src = '../../scripts/navbar.js';
+          document.body.appendChild(script);
+        })
+        .catch(error => console.error('Error cargando el navbar:', error));
+      
+      // Nuevo código para cargar constructores
+      fetch('/php/consultas/obtener_constructores.php')
+        .then(response => response.json())
+        .then(constructores => {
+          const select = document.getElementById('constructor_id');
+          
+          // Si no hay constructores, mostrar mensaje
+          if (constructores.length === 0) {
+            const option = document.createElement('option');
+            option.value = "";
+            option.textContent = "No hay constructores registrados";
+            select.appendChild(option);
+          } else {
+            // Agregar cada constructor al selector
+            constructores.forEach(constructor => {
+              const option = document.createElement('option');
+              option.value = constructor.id;
+              option.textContent = constructor.nombre;
+              select.appendChild(option);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error cargando constructores:', error);
+          const select = document.getElementById('constructor_id');
+          const option = document.createElement('option');
+          option.value = "";
+          option.textContent = "Error al cargar constructores";
+          select.appendChild(option);
+        });
+    });
+  </script>
+</body>
+</html>

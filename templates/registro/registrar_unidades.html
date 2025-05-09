@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMO - Registro de Unidades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="../../styles/navbar.css">
+  <link rel="stylesheet" href="../../styles/formularios.css">
+  <script src="../../scripts/navbar.js" defer></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+  <main>
+    <section class="form-section">
+      <div class="container">
+        <h1>Registro de Unidades</h1>
+        <p class="form-intro">Registra las unidades o viviendas que componen tu edificio.</p>
+        
+        <form class="registro-form" action="/php/registro/registrar_unidades.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="edificio_id">Edificio</label>
+            <select id="edificio_id" name="edificio_id" required>
+              <option value="">Seleccionar edificio</option>
+              <!-- Los edificios se cargarán mediante JavaScript -->
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="numero_unidad">Número o Identificador de Unidad</label>
+            <input type="text" id="numero_unidad" name="numero_unidad" placeholder="Ej: 101, A-23" required />
+          </div>
+          
+          <div class="form-group form-row">
+            <div class="form-col">
+              <label for="piso">Piso</label>
+              <input type="number" id="piso" name="piso" placeholder="Número de piso" />
+            </div>
+            
+            <div class="form-col">
+              <label for="torre">Torre o Bloque</label>
+              <input type="text" id="torre" name="torre" placeholder="Ej: Torre A, Bloque 2" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="tipo">Tipo de Unidad</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">Seleccionar tipo</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="casa">Casa</option>
+              <option value="local">Local Comercial</option>
+              <option value="oficina">Oficina</option>
+              <option value="bodega">Bodega</option>
+              <option value="parqueadero">Parqueadero</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado" required>
+              <option value="vacante">Vacante</option>
+              <option value="ocupado">Ocupado</option>
+              <option value="mantenimiento">En Mantenimiento</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="dueño_id">Propietario (opcional)</label>
+            <select id="dueño_id" name="dueño_id">
+              <option value="">Sin propietario asignado</option>
+              <!-- Los propietarios se cargarán mediante JavaScript -->
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Características adicionales de la unidad" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="fotos">Fotografías (opcional)</label>
+            <input type="file" id="fotos" name="fotos[]" accept="image/*" multiple />
+            <small>Puedes seleccionar varias imágenes</small>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar Unidad</button>
+            <a href="/dashboard/unidades" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+        
+        <!-- Opción para registro múltiple -->
+        <div class="form-alternative">
+          <p>¿Necesitas registrar múltiples unidades? <a href="/registro/unidades/masivo">Utiliza el registro masivo</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cargar el navbar
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/templates/components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          
+          // Reinicializar el JS del navbar
+          const script = document.createElement('script');
+          script.src = '../../scripts/navbar.js';
+          document.body.appendChild(script);
+        })
+        .catch(error => console.error('Error cargando el navbar:', error));
+      
+      // Mostrar mensaje para saber que el JavaScript se está ejecutando
+      console.log('Iniciando carga de datos...');
+      
+      // Cargar edificios con manejo de errores mejorado
+      console.log('Solicitando edificios...');
+      fetch('/php/consultas/obtener_edificios.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la respuesta: ' + response.status);
+          }
+          console.log('Respuesta recibida para edificios');
+          return response.json();
+        })
+        .then(edificios => {
+          console.log('Edificios recibidos:', edificios);
+          const select = document.getElementById('edificio_id');
+          
+          // Si no hay edificios, mostrar mensaje
+          if (!edificios || edificios.length === 0) {
+            console.log('No hay edificios disponibles');
+            const option = document.createElement('option');
+            option.value = "";
+            option.textContent = "No hay edificios registrados";
+            select.appendChild(option);
+          } else {
+            // Agregar cada edificio al selector
+            edificios.forEach(edificio => {
+              console.log('Añadiendo edificio:', edificio);
+              const option = document.createElement('option');
+              option.value = edificio.id;
+              option.textContent = edificio.nombre;
+              select.appendChild(option);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error cargando edificios:', error);
+          const select = document.getElementById('edificio_id');
+          const option = document.createElement('option');
+          option.value = "";
+          option.textContent = "Error al cargar edificios";
+          select.appendChild(option);
+          
+          // Mostrar un mensaje visible en la página
+          const errorDiv = document.createElement('div');
+          errorDiv.style.color = 'red';
+          errorDiv.style.marginTop = '5px';
+          errorDiv.textContent = 'Error al cargar edificios. Revisa la consola para más detalles.';
+          select.parentNode.appendChild(errorDiv);
+        });
+      
+      // Cargar propietarios con manejo de errores mejorado
+      console.log('Solicitando propietarios...');
+      fetch('/php/consultas/obtener_propietarios.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la respuesta: ' + response.status);
+          }
+          console.log('Respuesta recibida para propietarios');
+          return response.json();
+        })
+        .then(propietarios => {
+          console.log('Propietarios recibidos:', propietarios);
+          const select = document.getElementById('dueño_id');
+          
+          // Si hay propietarios, agregarlos al selector
+          if (propietarios && propietarios.length > 0) {
+            // Agregar cada propietario al selector
+            propietarios.forEach(propietario => {
+              console.log('Añadiendo propietario:', propietario);
+              const option = document.createElement('option');
+              option.value = propietario.id;
+              option.textContent = propietario.nombre + ' (' + propietario.email + ')';
+              select.appendChild(option);
+            });
+          } else {
+            console.log('No hay propietarios disponibles');
+          }
+        })
+        .catch(error => {
+          console.error('Error cargando propietarios:', error);
+          const select = document.getElementById('dueño_id');
+          const option = document.createElement('option');
+          option.value = "";
+          option.textContent = "Error al cargar propietarios";
+          select.appendChild(option);
+          
+          // Mostrar un mensaje visible en la página
+          const errorDiv = document.createElement('div');
+          errorDiv.style.color = 'red';
+          errorDiv.style.marginTop = '5px';
+          errorDiv.textContent = 'Error al cargar propietarios. Revisa la consola para más detalles.';
+          select.parentNode.appendChild(errorDiv);
+        });
+    });
+  </script>
+</body>
+</html>

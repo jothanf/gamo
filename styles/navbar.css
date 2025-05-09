@@ -1,0 +1,301 @@
+/* Estilos para el navbar */
+.main-header {
+  background-color: var(--color-blanco);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--color-verde-oscuro);
+  font-weight: 700;
+}
+
+.main-nav .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.main-nav a {
+  color: var(--color-texto-principal);
+  font-weight: 500;
+  transition: color var(--transition-rapida);
+}
+
+.main-nav a:hover {
+  color: var(--color-terracota);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all var(--transition-rapida);
+}
+
+.btn-login {
+  color: var(--color-verde-oscuro);
+  border: 1px solid var(--color-verde-oscuro);
+}
+
+.btn-login:hover {
+  background-color: var(--color-gris-claro);
+}
+
+.btn-register {
+  background-color: var(--color-verde-oscuro);
+  color: var(--color-blanco);
+}
+
+.btn-register:hover {
+  background-color: var(--color-verde-medio);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Responsive para el navbar */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+  
+  .main-nav {
+    order: 3;
+    width: 100%;
+    margin-top: 1rem;
+    display: none;
+  }
+  
+  .main-nav.active {
+    display: block;
+  }
+  
+  .main-nav .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .mobile-menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-verde-oscuro);
+  }
+}
+
+/* Estilos para el menú desplegable */
+
+/* Dropdown en el navbar */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  margin-left: 0.3rem;
+  transition: transform var(--transition-rapida);
+}
+
+.dropdown:hover .dropdown-arrow,
+.dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background-color: var(--color-blanco);
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-rapida);
+  z-index: 100;
+  padding: 0.5rem 0;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  display: block;
+  margin: 0;
+}
+
+.dropdown-menu a {
+  padding: 0.7rem 1.2rem;
+  display: block;
+  color: var(--color-texto-principal);
+  transition: background-color var(--transition-rapida);
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--color-gris-claro);
+  color: var(--color-verde-oscuro);
+}
+
+/* Estilos para dropdown en móvil */
+.mobile-dropdown {
+  position: relative;
+}
+
+.mobile-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.mobile-dropdown-menu {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-verde-medio);
+  margin: 0.5rem 0;
+}
+
+.mobile-dropdown.active .mobile-dropdown-menu {
+  display: block;
+}
+
+.mobile-dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-menu li {
+  margin: 0;
+}
+
+.mobile-dropdown-menu a {
+  padding: 0.8rem 0;
+  display: block;
+  font-size: 0.95rem;
+}
+
+/* Ajustes para el menú móvil */
+.mobile-menu {
+  display: none;
+  padding: 1rem;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-blanco);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  transition: transform var(--transition-media);
+  transform: translateY(-100%);
+}
+
+.mobile-menu.active {
+  display: flex;
+  transform: translateY(0);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-nav-links li {
+  margin-bottom: 0.5rem;
+}
+
+.mobile-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-auth-buttons .btn {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .dropdown {
+    display: none; /* Ocultar dropdown en la versión móvil de la barra de navegación */
+  }
+}
+
+/* Estilos para el botón activo */
+.btn-login.active, .btn-register.active {
+  background-color: var(--color-verde-oscuro);
+  color: var(--color-blanco);
+}
+
+/* Estilo para mantener el dropdown abierto */
+.dropdown.active .dropdown-menu {
+  display: block;
+}
+
+/* Estilo para el menú móvil cuando está activo */
+.mobile-menu.active {
+  display: block;
+}
+
+/* Estilo para el toggle de menú móvil cuando está activo */
+.mobile-menu-toggle.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Estilos para el dropdown móvil */
+.mobile-dropdown.active .mobile-dropdown-menu {
+  display: block;
+}
+
+.mobile-dropdown-menu {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 1rem;
+} 

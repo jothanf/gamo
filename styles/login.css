@@ -1,0 +1,121 @@
+/* Estilos para formulario de inicio de sesión - GAMO CRM */
+
+.login-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: var(--color-blanco);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-header h1 {
+    color: var(--color-verde-oscuro);
+    margin-bottom: 10px;
+    font-family: var(--font-title);
+}
+
+.login-header p {
+    color: var(--color-texto-principal);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-verde-oscuro);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-gris-claro);
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: var(--font-body);
+    transition: border-color var(--transition-rapida);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-verde-medio);
+    box-shadow: 0 0 0 3px rgba(104, 146, 100, 0.2);
+}
+
+.btn-login-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-terracota);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-rapida);
+    font-family: var(--font-body);
+}
+
+.btn-login-submit:hover {
+    background-color: var(--color-verde-oscuro);
+    transform: translateY(-2px);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-gris-claro);
+}
+
+.login-footer a {
+    color: var(--color-verde-medio);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-footer a:hover {
+    color: var(--color-verde-oscuro);
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: #ffe0e0;
+    color: #d33;
+    border: 1px solid #ffd0d0;
+}
+
+.alert-success {
+    background-color: var(--color-verde-claro);
+    color: var(--color-verde-oscuro);
+    border: 1px solid var(--color-verde-claro);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-container {
+        max-width: 90%;
+        margin: 30px auto;
+        padding: 20px;
+    }
+    
+    .login-header h1 {
+        font-size: 1.8rem;
+    }
+}

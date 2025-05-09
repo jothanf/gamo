@@ -1,0 +1,353 @@
+/* Estilos para formularios - GAMO CRM */
+
+.form-section {
+  padding: 4rem 0;
+  background-color: var(--color-fondo-claro);
+}
+
+.form-section h1 {
+  color: var(--color-verde-oscuro);
+  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  text-align: center;
+}
+
+.form-intro {
+  text-align: center;
+  color: var(--color-texto-principal);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.registro-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--color-blanco);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-verde-oscuro);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--color-blanco);
+  transition: border-color var(--transition-rapida);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-verde-medio);
+  box-shadow: 0 0 0 3px rgba(104, 146, 100, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-col {
+  flex: 1;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-rapida);
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--color-verde-medio);
+  color: var(--color-blanco);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-verde-oscuro);
+}
+
+.btn-secondary {
+  background-color: var(--color-gris-claro);
+  color: var(--color-texto-principal);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-beige-arena);
+}
+
+.form-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gris-claro);
+}
+
+.form-footer a {
+  color: var(--color-verde-medio);
+  font-weight: 500;
+}
+
+.form-footer a:hover {
+  color: var(--color-verde-oscuro);
+  text-decoration: underline;
+}
+
+/* Estilos para input de tipo file */
+input[type="file"] {
+  padding: 0.5rem;
+}
+
+input[type="file"]::file-selector-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--color-beige-arena);
+  color: var(--color-texto-principal);
+  font-family: var(--font-body);
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-rapida);
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--color-terracota);
+  color: var(--color-blanco);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .registro-form {
+    padding: 1.5rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Estilo para opciones alternativas debajo del formulario */
+.form-alternative {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--color-gris-claro);
+  border-radius: 6px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-alternative a {
+  color: var(--color-verde-medio);
+  font-weight: 500;
+}
+
+.form-alternative a:hover {
+  color: var(--color-verde-oscuro);
+  text-decoration: underline;
+}
+
+/* Estilo para textos pequeños de ayuda */
+.form-group small {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--color-texto-principal);
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+/* Estilos para formulario de avatar */
+.avatar-classes {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-class {
+  flex: 1;
+  position: relative;
+}
+
+.avatar-class input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.avatar-class-label {
+  display: block;
+  padding: 1.5rem 1rem;
+  border: 2px solid var(--color-gris-claro);
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-rapida);
+  height: 100%;
+}
+
+.avatar-class input[type="radio"]:checked + .avatar-class-label {
+  border-color: var(--color-verde-medio);
+  background-color: rgba(104, 146, 100, 0.1);
+  box-shadow: 0 2px 10px rgba(104, 146, 100, 0.2);
+}
+
+.avatar-class-icon {
+  margin-bottom: 1rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-class-icon img {
+  max-height: 100%;
+  width: auto;
+}
+
+.avatar-class-label h3 {
+  color: var(--color-verde-oscuro);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.avatar-class-label p {
+  font-size: 0.9rem;
+  color: var(--color-texto-principal);
+}
+
+.form-section-title {
+  color: var(--color-verde-oscuro);
+  margin: 2.5rem 0 0.5rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gris-claro);
+  font-size: 1.4rem;
+}
+
+.form-section-desc {
+  color: var(--color-texto-principal);
+  margin-bottom: 1.5rem;
+}
+
+.habilidades-container {
+  background-color: var(--color-gris-claro);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.habilidad-group {
+  margin-bottom: 1.2rem;
+}
+
+.habilidad-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.puntos-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: var(--color-blanco);
+  border-radius: 4px;
+  outline: none;
+}
+
+.puntos-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--color-verde-medio);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.puntos-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--color-verde-medio);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.puntos-value {
+  font-weight: 500;
+  color: var(--color-verde-oscuro);
+  min-width: 30px;
+  text-align: center;
+}
+
+.puntos-disponibles {
+  background-color: var(--color-blanco);
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.puntos-disponibles p {
+  color: var(--color-verde-oscuro);
+}
+
+#puntos-restantes.error {
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+/* Responsive para avatar classes */
+@media (max-width: 768px) {
+  .avatar-classes {
+    flex-direction: column;
+  }
+} 

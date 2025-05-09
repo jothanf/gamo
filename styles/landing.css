@@ -1,0 +1,365 @@
+/* Importar estilos base */
+@import url('index.css');
+
+/* Header */
+header { 
+  background: linear-gradient(45deg, var(--color-verde-oscuro), var(--color-acento-tierra)); 
+  color: var(--color-blanco); 
+  padding: 3rem 1rem; 
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, var(--color-secundario), var(--color-azul-acento), var(--color-secundario));
+  opacity: 0.6;
+}
+
+header h1 { 
+  font-family: var(--font-title); 
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: fadeInDown 1s ease;
+}
+
+header p { 
+  margin-top: 1rem; 
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 1.2s ease;
+}
+
+/* Navegación */
+nav { 
+  display: flex; 
+  justify-content: center; 
+  gap: 2rem; 
+  margin-top: 1.5rem;
+  animation: fadeIn 1.4s ease;
+}
+
+nav a { 
+  color: var(--color-blanco); 
+  text-decoration: none; 
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: transform var(--transition-rapida);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--color-blanco);
+  transition: all var(--transition-rapida);
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+}
+
+nav a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Botón CTA */
+.btn-cta { 
+  background: var(--color-blanco); 
+  color: var(--color-verde-oscuro); 
+  padding: 0.75rem 1.5rem; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  font-weight: 600; 
+  margin-top: 1.5rem; 
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all var(--transition-rapida);
+  animation: pulse 3s infinite;
+}
+
+.btn-cta:hover { 
+  background: rgba(255,255,255,0.9);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Secciones */
+section { 
+  padding: 4rem 1rem; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  scroll-margin-top: 2rem;
+}
+
+section h2 {
+  text-align: center; 
+  font-family: var(--font-title); 
+  color: var(--color-verde-oscuro);
+  margin-bottom: 2rem;
+  position: relative;
+  font-size: 2.2rem;
+}
+
+section h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--color-acento-tierra);
+  margin: 0.8rem auto 2rem;
+}
+
+/* Tarjetas de características */
+.features { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 2rem;
+}
+
+.feature-card { 
+  background: var(--color-blanco); 
+  padding: 2rem; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  position: relative;
+  transition: all var(--transition-media);
+  border-bottom: 3px solid transparent;
+}
+
+.feature-card:hover { 
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  border-bottom: 3px solid var(--color-acento-tierra);
+}
+
+.feature-card::before { 
+  content: attr(data-image-desc); 
+  display: block; 
+  height: 150px; 
+  background: var(--color-gris-claro); 
+  color: #666; 
+  font-size: 0.9rem; 
+  padding: 1rem; 
+  border-radius: 5px; 
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-rapida);
+}
+
+.feature-card:hover::before {
+  background: linear-gradient(45deg, var(--color-gris-claro), var(--color-secundario));
+}
+
+.feature-card h3 { 
+  font-family: var(--font-title); 
+  margin-bottom: 1rem; 
+  color: var(--color-verde-oscuro);
+  font-size: 1.4rem;
+}
+
+.feature-card p { 
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Mockups */
+.mockups { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 1.5rem; 
+  justify-content: center; 
+  margin-top: 2rem;
+}
+
+.mockup { 
+  background: var(--color-gris-claro); 
+  padding: 1.5rem; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  width: 100%; 
+  max-width: 320px; 
+  min-height: 220px; 
+  position: relative;
+  transition: all var(--transition-media);
+  border: 2px solid transparent;
+}
+
+.mockup:hover {
+  transform: scale(1.05);
+  border-color: var(--color-acento-tierra);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.mockup::before { 
+  content: attr(data-mockup-desc); 
+  display: block; 
+  color: #555; 
+  font-size: 0.9rem; 
+  text-align: center; 
+  margin-top: 80px;
+}
+
+/* Formulario */
+form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1rem; 
+  max-width: 480px; 
+  margin: 1.5rem auto;
+  background: var(--color-blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  transition: transform var(--transition-media);
+}
+
+form:hover {
+  transform: translateY(-5px);
+}
+
+input, textarea { 
+  padding: 0.85rem; 
+  border-radius: 5px; 
+  border: 1px solid var(--color-gris-claro); 
+  font-family: var(--font-body);
+  transition: all var(--transition-rapida);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-acento-tierra);
+  box-shadow: 0 0 0 3px rgba(192, 134, 74, 0.2);
+}
+
+button { 
+  background: var(--color-acento-tierra); 
+  color: var(--color-blanco); 
+  padding: 0.85rem; 
+  border-radius: 5px; 
+  font-weight: 600;
+  transition: all var(--transition-rapida);
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 70%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+  transition: all 0.6s;
+}
+
+button:hover {
+  background: var(--color-verde-oscuro);
+  transform: translateY(-2px);
+}
+
+button:hover::after {
+  left: 130%;
+}
+
+/* Footer */
+footer { 
+  background: var(--color-verde-oscuro); 
+  color: var(--color-blanco); 
+  text-align: center; 
+  padding: 2.5rem 1rem;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--color-secundario), var(--color-acento-tierra), var(--color-secundario));
+}
+
+footer p { 
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+  
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .mockups {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Animación al hacer scroll */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-lenta), transform var(--transition-lenta);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+} 

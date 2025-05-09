@@ -1,0 +1,88 @@
+:root {
+    /* Colores principales */
+    --color-verde-oscuro: #1E3A34;      /* Principal / Titulares / Branding */
+    --color-beige-arena: #D7C28D;       /* Secundario / Fondos suaves */
+    --color-terracota: #C0864A;         /* Acento / Botones / Indicadores */
+  
+    /* Colores UI adicionales */
+    --color-fondo-claro: #FDF9F3;       /* Fondo general */
+    --color-texto-principal: #1F1F1F;   /* Texto negro suave */
+    --color-gris-claro: #EDE9E3;        /* Bordes, separadores */
+    --color-blanco: #FFFFFF;            /* Tarjetas, botones, fondo de inputs */
+  
+    /* Iconografía y estados */
+    --color-verde-oliva: #A2B17C;       /* Iconos plantas, zonas verdes */
+    --color-verde-claro: #B4CF90;       /* Misiones completadas */
+    --color-verde-medio: #689264;       /* Botones / Iconos activos */
+    --color-amarillo-suave: #F8E5A2;    /* Alertas suaves / información */
+    --color-azul-claro: #C1DDE9;        /* Agua / Piscina / Recursos hídricos */
+    --color-azul-medio: #7DA9BE;        /* Enlaces, acciones secundarias */
+    --color-dorado-icono: #D6B86C;      /* Iconos tipo recompensa, logros */
+  
+    /* Tipografías */
+    --font-title: 'League Spartan', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+  
+    /* Transiciones */
+    --transition-rapida: 0.3s ease;
+    --transition-media: 0.5s ease;
+}
+
+/* Reset básico */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body { 
+  font-family: var(--font-body); 
+  background: var(--color-beige); 
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-rapida);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button, 
+input[type="submit"] {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+}
+
+/* Utilidades comunes */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.my-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}

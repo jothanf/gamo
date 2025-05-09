@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMO - Registro de Zona Común</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="../../styles/navbar.css">
+  <link rel="stylesheet" href="../../styles/formularios.css">
+  <script src="../../scripts/navbar.js" defer></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+  <main>
+    <section class="form-section">
+      <div class="container">
+        <h1>Registro de Zona Común</h1>
+        <p class="form-intro">Registra las áreas comunes de tu edificio para facilitar su gestión y reserva.</p>
+        
+        <form class="registro-form" action="/registro/zona-comun" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="edificio_id">Edificio</label>
+            <select id="edificio_id" name="edificio_id" required>
+              <option value="">Seleccionar edificio</option>
+              <!-- Aquí se cargarían dinámicamente los edificios -->
+              {% for edificio in edificios %}
+                <option value="{{ edificio.id }}">{{ edificio.nombre }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="nombre">Nombre de la Zona Común</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Piscina, Salón Social, Gimnasio" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="tipo">Tipo de Zona</label>
+            <select id="tipo" name="tipo">
+              <option value="recreativa">Recreativa</option>
+              <option value="deportiva">Deportiva</option>
+              <option value="social">Social</option>
+              <option value="servicios">Servicios</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="ubicacion">Ubicación en el Edificio</label>
+            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Piso 1, Azotea, Sótano" />
+          </div>
+          
+          <div class="form-group">
+            <label for="capacidad">Capacidad (personas)</label>
+            <input type="number" id="capacidad" name="capacidad" placeholder="Número máximo de personas" min="1" />
+          </div>
+          
+          <div class="form-group">
+            <label for="horario">Horario de Disponibilidad</label>
+            <input type="text" id="horario" name="horario" placeholder="Ej: 8:00 AM - 10:00 PM, Todos los días" />
+          </div>
+          
+          <div class="form-group">
+            <label for="reservable">¿Se puede reservar?</label>
+            <select id="reservable" name="reservable">
+              <option value="si">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Detalles adicionales de la zona común" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="fotos">Fotografías</label>
+            <input type="file" id="fotos" name="fotos" accept="image/*" multiple />
+            <small>Puedes seleccionar varias imágenes</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="reglamento">Reglamento (opcional)</label>
+            <input type="file" id="reglamento" name="reglamento" accept=".pdf,.doc,.docx" />
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar Zona Común</button>
+            <a href="/dashboard/zonas-comunes" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="navbar-container"></div>
+  <script>
+    // Cargar el navbar
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/templates/components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          
+          // Reinicializar el JS del navbar
+          const script = document.createElement('script');
+          script.src = '../../scripts/navbar.js';
+          document.body.appendChild(script);
+        })
+        .catch(error => console.error('Error cargando el navbar:', error));
+    });
+  </script>
+</body>
+</html>
